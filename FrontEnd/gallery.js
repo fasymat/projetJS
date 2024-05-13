@@ -128,6 +128,6 @@ if (isLoggedIn()) {
   document.querySelector('.edit-mode-bar').style.display = 'none'; 
   document.querySelector('.modifier').style.display = 'none';// Hide the element
   document.getElementById('logout').style.display = 'none';
-  document.getElementById('buttons').style.display = 'flex';
+  ;
 }
 
