@@ -26,14 +26,13 @@ function genererWorks(works) {
     nomElement.innerText = article.title;
 
     const figureElement = document.createElement('figure');
+    figureElement.setAttribute('id','projet'+ works[i].id)
     const figcaptionElement = document.createElement('figcaption');
 
     figureElement.appendChild(imageElement);
     figcaptionElement.innerText = article.title;
     figureElement.appendChild(figcaptionElement);
-
     worksElement.appendChild(figureElement);
-
     sectionGallery.appendChild(worksElement);
   }
 }

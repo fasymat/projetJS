@@ -250,8 +250,25 @@ button:focus {
 .modifier {
 	display:flex;
 	gap: 10px;
+	cursor: pointer;
 }
-
+.fa-xmark {
+	height: 24px;
+	width: 24px;
+}
+.js-modal-close {
+	position: absolute;
+    right: 10px;
+    top: 10px;
+	border: none;
+	color: black;
+	border-radius: 0;
+	padding: 0;
+}
+.js-modal-close:hover {
+	background-color: transparent;
+	color: black;
+}
 .modal {
 	position: fixed;
 	display:flex;
@@ -263,8 +280,51 @@ button:focus {
 	height: 100%;
 	background: rgba(0, 0, 0, 0.8);
 	animation: fadeIn .3s both;
+	overflow: scroll;
+}
+.modal-content img {
+	width: 79px;
+}
+.modal-content{
+  	flex-direction: column;
+	margin-top: 50px;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+	grid-column-gap: 20px;
+	grid-row-gap: 20px;
+	margin-left: 50px;
 }
 
+
+.modal-content .trash {
+	width: 20px;
+	height: 20px;
+	background-color: black;
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	color: white;
+	font-size: 12px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 3px;
+}
+.modal-content .trash i {
+	width: auto;
+	height: auto;
+}
+
+.modal-content.hidden {
+	visibility: hidden;
+	opacity: 0;
+	transition: visibility 0s, opacity 0.3s;
+  }
+  
+.modal-content article {
+	position: relative;
+	width: 79px;
+}
 .modal-wrapper {
 	width: 630px;
 	height: 688px;
@@ -272,7 +332,25 @@ button:focus {
 	background-color: white;
 	animation: slideFromTop .5s both;
 }
-
+.add-photo-btn {
+	position: absolute;
+	bottom: 20px; /* Adjust the value as needed */
+	left: 50%;
+	transform: translateX(-50%); /* Center the button horizontally */
+	/* Add any other styles for the button */
+  }
+.back-btn{
+	position: absolute;
+    top: 1px;
+    border: none;
+    left: 10px;
+    font-size: 20px;
+    color: black;
+}
+.back-btn:hover {
+	background-color: transparent;
+	color: black;
+}
 @keyframes fadeIn {
 	from { opacity: 0;}
 	to { opacity: 1;}
@@ -282,3 +360,120 @@ button:focus {
 	from { transform: translateY(-50px);}
 	to { transform: translateY(0px);}
 }
+
+.add-photo{
+	position: relative;
+	background-color: #CBD6DC; /* Couleur de fond du bouton */
+	border: none; /* Suppression de la bordure par défaut */
+	padding: 10px 20px; /* Espacement interne du bouton */	
+	border-radius: 5px; /* Arrondir les coins du bouton */
+	cursor: pointer; /* Changer le curseur de la souris au survol */
+	z-index: 0; /* Positionner le bouton en arrière-plan */
+	border-radius: 50px;
+  }
+  .add-photo:hover {
+	background-color: #CBD6DC; /* Couleur de fond du bouton au survol */
+	color: white; /* Couleur du texte du bouton au survol */
+  }
+  .add-photo p {
+	margin: 0; /* Suppression des marges par défaut */
+	color: #306685; /* Couleur du texte du bouton */
+	z-index: 0; /* Positionner le texte en arrière-plan */
+  }
+  
+  .add-photo input[type="file"] {
+	opacity: 0; /* Rendre l'entrée de fichier invisible */
+	position: absolute; /* Positionner l'entrée de fichier absolument */
+	left: 0; /* Positionner l'entrée de fichier à gauche du bouton */
+	top: 0; /* Positionner l'entrée de fichier en haut du bouton */
+	width: 100%; /* Définir la largeur de l'entrée de fichier à 100% du bouton */
+	height: 100%; /* Définir la hauteur de l'entrée de fichier à 100% du bouton */
+	z-index: 1; /* Positionner l'entrée de fichier au premier plan */
+  }
+
+  .add-photo-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin-left: 50px;
+	margin-top: 80px;
+	width: 420px;
+	height: 169px;
+	background-color: #E8F1F6;
+  }
+
+  .text-add-photo {
+	display: flex;
+	color: black;
+	justify-content: center;
+	margin-right: 60px;
+	margin-top: -20px;
+  }
+.photo-view {
+	display: flex;
+	justify-content: center;
+}
+  .title-add-photo {
+	display: flex;
+	color: black;
+	font:bold;
+	font-size: 26px;
+	font-family: 'work sans';
+	align-items: center;
+	margin-right: 50px;
+}
+
+ .img-icon{
+	display: flex;
+	margin-bottom: 10px;
+ }
+ .fa-regular, .far {
+    font-weight: 400;
+    font-size: 50px;
+	color: #B9C5CC;
+ }
+
+ #add-photo-form {
+	display: flex;
+	flex-direction: column;
+	gap: 30px;
+	margin-top: 30px;
+ }
+
+ #title-field {
+		width: 420px;
+		height: 51px;
+		background: #FFF;
+		box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.09);
+		border: none;
+		margin-left: 30px;
+ }
+
+ #category-select{
+	width: 420px;
+		height: 51px;
+		background: #FFF;
+		box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.09);
+		border: none;
+		margin-left: 30px;
+ }
+
+ .photo-title , .cat-title{
+	margin-left: 30px;
+ }
+
+ #validate-btn {
+	width: 237px;
+height: 36px;
+border-radius: 60px;
+background: #1D6154;
+margin-left: 135px;
+color: #FFF;
+ }
+
+ .line {
+	width: 420px;
+border: 1px #B3B3B3 solid;
+margin-left: 30px;
+ }

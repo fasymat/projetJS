@@ -17,8 +17,33 @@
 	
 	<aside id="modal1" class="modal" aria-hidden="true" aria-modal="false" role="dialog" style="display: none;">
 <div class="modal-wrapper js-modal-stop" >
-	<button class="js-modal-close">fermer la modale</button>
-iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii
+	<button class="js-modal-close"><i class="fa-solid fa-xmark"></i></button>
+	<div class="modal-content">
+		<p class="line"></p>
+	  </div>
+	  <div class="modal-content add-photo-modal" style="display: none;">
+		<h1 class="title-add-photo">Ajout Photo</h1>
+		<div class="photo-view"></div>
+		<div class="add-photo-container">
+			<p id="image-preview" class="img-icon"><i class="fa-regular fa-image"></i></p>	
+		<button class="add-photo">
+			<p>+ Ajouter photo</p>
+			<input id="photo-input" type="file" />
+		  </button>
+		</div>
+		<span><p class="text-add-photo">jpg, png : 4mo max</p></span>
+		<form id="add-photo-form">
+			<label class="photo-title" for="photo-title">Titre</label>
+			<input type="text" name="titre" id="title-field" class="title-form-field" title="titre">
+			<label class="cat-title" for="category-select">Catégorie</label>
+			<select id="category-select" name="category">
+			  <!-- Options de catégories seront ajoutées ici -->
+			</select>
+			<p class="line"></p>
+			<button type="submit" id="validate-btn">Valider</button>
+		  </form>
+		  
+	  </div>
 	</div>
 	</aside>
 
