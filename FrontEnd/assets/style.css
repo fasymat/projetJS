@@ -413,11 +413,16 @@ button:focus {
 .photo-view {
 	display: flex;
 	justify-content: center;
+	background-color: rgba(232, 241, 246, 1);
+	width: 420px;
+    margin-left: 55px;
+    height: 169px;
+	margin-top: 30px;
 }
   .title-add-photo {
 	display: flex;
 	color: black;
-	font:bold;
+	font-weight: 400;
 	font-size: 26px;
 	font-family: 'work sans';
 	align-items: center;

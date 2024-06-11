@@ -57,6 +57,7 @@ fetch('http://localhost:5678/api/works')
 
   const addPhotoModal = document.querySelector('.add-photo-modal');
 
+
   // Create the "Back" button
   const backButton = document.createElement('button');
   const arrow = document.createElement('i');
@@ -80,12 +81,12 @@ fetch('http://localhost:5678/api/works')
   addPhotoButton.addEventListener('click', () => {
     sectionModal.style.display = 'none';
     addPhotoModal.style.display = 'block';
+
   });
     // Add event listener to the "Back" button
     backButton.addEventListener('click', () => {
       sectionModal.style.display = 'grid';
       addPhotoModal.style.display = 'none';
-    
     });
 
   
@@ -148,9 +149,12 @@ const validateBtn = document.getElementById('validate-btn');
 const addPhotoForm = document.getElementById('add-photo-form');
 
 // .......................
+const textAddPhoto = document.querySelector('.text-format-photo');
 const addPhotoContainer = document.querySelector('.add-photo-container');
 const photoView = document.querySelector('.photo-view');
 const photoInput = document.getElementById('photo-input');
+photoView.style.display = 'none';
+
 photoInput.addEventListener('change', () => {
   console.log('sssss');
   const imageURL = URL.createObjectURL(photoInput.files[0]);
@@ -160,6 +164,8 @@ photoInput.addEventListener('change', () => {
 
  addPhotoContainer.style.display = 'none';
   photoView.style.display = 'flex';
+  textAddPhoto.style.display = 'none';
+
 })
 
 
@@ -212,7 +218,39 @@ validateBtn.addEventListener('click', (event) => {
         worksElement.appendChild(trash);
         worksElement.appendChild(imageElement);
         sectionModal.appendChild(worksElement);
-        
+
+        trash.addEventListener('click', () => {
+          fetch(`http://localhost:5678/api/works/${article.id}`, {
+          method: "DELETE",
+						headers: {
+							"Content-type": "application/json",
+							Authorization: "Bearer " + localStorage.getItem("token"),
+						},
+        })
+        .then((reponse) => reponse.json)
+
+       .then(data => {
+        console.log(data);
+        sectionModal.removeChild(worksElement);
+        document.getElementById('projet'+article.id).remove();
+        })
+       .catch(error => {
+          console.error('Error fetching or parsing the data:', error);
+        });
+        });
+
+          // Ajouter la nouvelle image à la galerie
+    const sectionGallery = document.querySelector('.gallery');
+    const article = document.createElement('article');
+    const figureElement = document.createElement('figure');
+    figureElement.setAttribute('id', 'projet' + data.id);
+    const figcaptionElement = document.createElement('figcaption');
+
+    figureElement.appendChild(imageElement.cloneNode(true));
+    figcaptionElement.innerText = data.title;
+    figureElement.appendChild(figcaptionElement);
+    article.appendChild(figureElement);
+    sectionGallery.appendChild(article);
     })
     .catch(error => {
       console.error('Erreur lors de l\'ajout de la photo :', error);
