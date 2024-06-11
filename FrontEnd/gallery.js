@@ -26,7 +26,7 @@ function genererWorks(works) {
     nomElement.innerText = article.title;
 
     const figureElement = document.createElement('figure');
-    figureElement.setAttribute('id','projet'+ works[i].id)
+    worksElement.setAttribute('id','projet'+ works[i].id)
     const figcaptionElement = document.createElement('figcaption');
 
     figureElement.appendChild(imageElement);

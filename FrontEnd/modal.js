@@ -154,7 +154,6 @@ const addPhotoContainer = document.querySelector('.add-photo-container');
 const photoView = document.querySelector('.photo-view');
 const photoInput = document.getElementById('photo-input');
 photoView.style.display = 'none';
-
 photoInput.addEventListener('change', () => {
   console.log('sssss');
   const imageURL = URL.createObjectURL(photoInput.files[0]);
@@ -171,7 +170,7 @@ photoInput.addEventListener('change', () => {
 
 validateBtn.addEventListener('click', (event) => {
   event.preventDefault(); // Empêcher le rechargement de la page
-
+  
   // Récupérer les valeurs du formulaire
   const title = document.getElementById('title-field').value;
   const categoryId = document.getElementById('category-select').value;
@@ -205,11 +204,28 @@ validateBtn.addEventListener('click', (event) => {
     .then(data => {
         console.log(data);
         alert('Photo ajoutée avec succès');
+        photoView.innerHTML = '';
+        photoView.style.display = 'none';
+        addPhotoContainer.style.display = 'flex';
         // Réinitialiser le formulaire
         addPhotoForm.reset(); 
-        const worksElement = document.createElement('article');
-        const imageElement = document.createElement('img');
-        imageElement.src = data.imageUrl;
+      // Ajouter la nouvelle image à la galerie
+      const imageElement = document.createElement('img');
+      imageElement.src = data.imageUrl;
+      const worksElement = document.createElement('article');
+      const sectionGallery = document.querySelector('.gallery');
+      const article = document.createElement('article');
+      const figureElement = document.createElement('figure');
+      article.setAttribute('id', 'figure' + data.id);
+      const figcaptionElement = document.createElement('figcaption');
+      figureElement.appendChild(imageElement.cloneNode(true));
+      figcaptionElement.innerText = data.title;
+      figureElement.appendChild(figcaptionElement);
+      article.appendChild(figureElement);
+      sectionGallery.appendChild(article);
+
+       
+       
         const trash = document.createElement('div');
         trash.classList.add('trash');
         const iconTrash = document.createElement('i');
@@ -218,9 +234,10 @@ validateBtn.addEventListener('click', (event) => {
         worksElement.appendChild(trash);
         worksElement.appendChild(imageElement);
         sectionModal.appendChild(worksElement);
+        const id = data.id;
 
         trash.addEventListener('click', () => {
-          fetch(`http://localhost:5678/api/works/${article.id}`, {
+          fetch(`http://localhost:5678/api/works/${id}`, {
           method: "DELETE",
 						headers: {
 							"Content-type": "application/json",
@@ -229,28 +246,19 @@ validateBtn.addEventListener('click', (event) => {
         })
         .then((reponse) => reponse.json)
 
-       .then(data => {
-        console.log(data);
+       .then(data1 => {
+        console.log(data1);
         sectionModal.removeChild(worksElement);
-        document.getElementById('projet'+article.id).remove();
+        console.log(id);
+        document.getElementById('figure'+id).remove();
+
         })
        .catch(error => {
           console.error('Error fetching or parsing the data:', error);
         });
         });
 
-          // Ajouter la nouvelle image à la galerie
-    const sectionGallery = document.querySelector('.gallery');
-    const article = document.createElement('article');
-    const figureElement = document.createElement('figure');
-    figureElement.setAttribute('id', 'projet' + data.id);
-    const figcaptionElement = document.createElement('figcaption');
-
-    figureElement.appendChild(imageElement.cloneNode(true));
-    figcaptionElement.innerText = data.title;
-    figureElement.appendChild(figcaptionElement);
-    article.appendChild(figureElement);
-    sectionGallery.appendChild(article);
+    
     })
     .catch(error => {
       console.error('Erreur lors de l\'ajout de la photo :', error);
